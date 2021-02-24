@@ -83,9 +83,8 @@ in { haskell-nix = prev.haskell-nix // {
       cabalProject = ''
         packages: .
         allow-newer: haskell-language-server:ghcide
-        constraints: ghcide <0.7.4
+        constraints: ghcide <0.7.4, hls-plugin-api <0.7.1.0, hls-retrie-plugin <0.1.1.1
       '';
-      configureArgs = "--disable-benchmarks --disable-tests";
     };
 
   }."${name}" or {};
