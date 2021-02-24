@@ -591,24 +591,16 @@ in {
     # always has `checkMaterialization = false` to avoid infinite
     # recursion.
     cabal-install-tool = {compiler-nix-name, ...}@args:
-      (
-      (if compiler-nix-name == "ghc901"
-        then a: final.haskell-nix.cabalProject (a // {
-          src = final.haskell-nix.sources.cabal-34;
-          configureArgs = "--disable-tests";
-          cabalProjectLocal = ''
-            allow-newer: *:base, *:template-haskell
-          '';
-        })
-        else a: final.haskell-nix.hackage-project (a // { version = "3.2.0.0"; })) ({
+      (final.haskell-nix.hackage-package ({
         name = "cabal-install";
+        version = "3.4.0.0";	
         index-state = final.haskell-nix.internalHackageIndexState;
         # When building cabal-install (only happens when checking materialization)
         # disable checking of the tools used to avoid infinite recursion.
         cabal-install = final.evalPackages.haskell-nix.cabal-install-unchecked.${compiler-nix-name};
         nix-tools = final.evalPackages.haskell-nix.nix-tools-unchecked.${compiler-nix-name};
         materialized = ../materialized + "/${compiler-nix-name}/cabal-install";
-      } // args)).hsPkgs.cabal-install.components.exes.cabal;
+      } // args)).components.exes.cabal;
     nix-tools-set = { compiler-nix-name, ... }@args:
       let
         project =

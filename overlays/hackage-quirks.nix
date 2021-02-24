@@ -15,21 +15,7 @@ in { haskell-nix = prev.haskell-nix // {
     cabal-install = {
       cabalProject = ''
         packages: .
-        allow-newer:
-          cabal-install:base
-          resolv:base
-          lukko:base
-          hsc2hs:base
-          zlib:base
-          hackage-security:base
-          hackage-security:template-haskell
-          cryptohash-sha256:base
-          async:base
-          hashable:base
-          HTTP:base
-          Cabal:base
-          directory:base
-          tar:base
+        allow-newer: cabal-install:base
       '';
       modules = [
         { reinstallableLibGhc = true; }
