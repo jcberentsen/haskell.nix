@@ -593,7 +593,7 @@ in {
     cabal-install-tool = {compiler-nix-name, ...}@args:
       (final.haskell-nix.hackage-package ({
         name = "cabal-install";
-        version = "3.4.0.0";	
+        version = "3.4.0.0";
         index-state = final.haskell-nix.internalHackageIndexState;
         # When building cabal-install (only happens when checking materialization)
         # disable checking of the tools used to avoid infinite recursion.
@@ -678,7 +678,7 @@ in {
           # a version of GHC for which there will be.
           if __pathExists (../materialized + "/${compiler-nix-name}/cabal-install/default.nix")
             then compiler-nix-name
-            else "ghc865";
+            else "ghc8104";
         checkMaterialization = false;
       }) final.haskell-nix.compiler;
     nix-tools = final.lib.mapAttrs (compiler-nix-name: _:
@@ -690,7 +690,7 @@ in {
           # a version of GHC for which there will be.
           if __pathExists (../materialized + "/${compiler-nix-name}/nix-tools/default.nix")
             then compiler-nix-name
-            else "ghc865";
+            else "ghc8104";
         checkMaterialization = false;
       }) final.haskell-nix.compiler;
 
