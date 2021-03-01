@@ -603,6 +603,12 @@ in {
       } // args)).components.exes.cabal;
     nix-tools-set = { compiler-nix-name, ... }@args:
       let
+        # Until all the dependencies build with 9.0.1 we will have to avoid
+        # building & testing nix-tools with 9.0.1
+        compiler-nix-name =
+          if args.compiler-nix-name == "ghc901"
+            then "ghc8104"
+            else args.compiler-nix-name;
         project =
           final.haskell-nix.cabalProject ({
             name = "nix-tools";
@@ -635,7 +641,7 @@ in {
                   "unix" "xhtml"
                 ];
             }];
-          } // args);
+          } // args // { inherit compiler-nix-name; });
         exes = project.nix-tools.components.exes // project.hpack.components.exes;
         tools = [
           final.buildPackages.nix

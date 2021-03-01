@@ -13,8 +13,8 @@ in eval.linkFarm "check-${compiler-nix-name}" [
   { name = "linux-nix-tools";      path = linux.haskell-nix.nix-tools.${compiler-nix-name}; }
   { name = "linux";                path = linux.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
   # In some cased you may need comment out one or more of these if the GHC version needed cannot be built.
-#  { name = "musl";                 path = linux.pkgsCross.musl64.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
-#  { name = "windows";              path = linux.pkgsCross.mingwW64.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
-#  { name = "arm";                  path = linux.pkgsCross.aarch64-multiplatform.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
+  { name = "musl";                 path = linux.pkgsCross.musl64.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
+  { name = "windows";              path = linux.pkgsCross.mingwW64.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
+  { name = "arm";                  path = linux.pkgsCross.aarch64-multiplatform.ghc-extra-projects.${compiler-nix-name}.plan-nix; }
 ]
 

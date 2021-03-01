@@ -358,4 +358,4 @@
           };
         };
       };
-    } // rec { src = (pkgs.lib).mkDefault ../cabal-install; }
+    } // rec { src = (pkgs.lib).mkDefault ../.; }
