@@ -1,6 +1,7 @@
 {
     "HTTP": {
         "branch": "ghc-9.0",
+        "builtin": false,
         "description": "Haskell HTTP package",
         "homepage": "http://hackage.haskell.org/package/HTTP",
         "owner": "phadej",
