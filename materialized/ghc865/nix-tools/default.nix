@@ -2,7 +2,7 @@
   pkgs = hackage:
     {
       packages = {
-        "http-client".revision = (((hackage."http-client")."0.7.5").revisions).default;
+        "http-client".revision = (((hackage."http-client")."0.6.4.1").revisions).default;
         "http-client".flags.network-uri = true;
         "cookie".revision = (((hackage."cookie")."0.4.5").revisions).default;
         "void".revision = (((hackage."void")."0.7.3").revisions).default;
