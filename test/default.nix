@@ -185,7 +185,7 @@ let
     index-state = callTest ./index-state { inherit compiler-nix-name; };
 
     unit = unitTests;
-  } // lib.optionalAttrs (builtins.compareVersions pkgs.haskell-nix.compiler.${compiler-nix-name}.version "9.0" < 0) {
+  } // lib.optionalAttrs (builtins.compareVersions pkgs.buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" < 0) {
     hls-cabal = callTest ./haskell-language-server/cabal.nix { inherit compiler-nix-name; };
     hls-stack = callTest ./haskell-language-server/stack.nix { inherit compiler-nix-name; };
   } // lib.optionalAttrs (!stdenv.hostPlatform.isGhcjs && !stdenv.hostPlatform.isWindows) {
@@ -203,7 +203,7 @@ let
     coverage-golden = callTest ./coverage-golden { inherit compiler-nix-name;};
     coverage-no-libs = callTest ./coverage-no-libs { inherit compiler-nix-name; };
     snapshots = callTest ./snapshots {};
-  } // lib.optionalAttrs (!stdenv.hostPlatform.isGhcjs && builtins.compareVersions pkgs.haskell-nix.compiler.${compiler-nix-name}.version "8.10" < 0) {
+  } // lib.optionalAttrs (!stdenv.hostPlatform.isGhcjs && builtins.compareVersions pkgs.buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "8.10" < 0) {
     # Tha version of pandoc used in this test does not build with ghcjs or ghc 8.10 (lookup-sha256 and fully-static build pandoc)
     lookup-sha256 = callTest ./lookup-sha256 { inherit compiler-nix-name; };
     # fully-static = callTest ./fully-static { inherit (pkgs) buildPackages; };
