@@ -76,6 +76,14 @@ in { haskell-nix = prev.haskell-nix // {
       '';
     };
 
+    hlint = {
+      # Added to get hlint building with GHC 9.0.1
+      cabalProject = ''
+        packages: .
+        allow-newer: hlint:ghc-lib-parser
+      '';
+    };
+
     # See https://github.com/input-output-hk/haskell.nix/issues/948
     postgrest = {
       cabalProject = ''
