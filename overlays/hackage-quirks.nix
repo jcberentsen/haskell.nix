@@ -70,7 +70,8 @@ in { haskell-nix = prev.haskell-nix // {
     haskell-language-server = {
       cabalProject = ''
         packages: .
-        allow-newer: haskell-language-server:ghcide
+        allow-newer: haskell-language-server:ghcide,
+          *:base, *:ghc-prim, *:template-haskell, *:ghc-boot-th, *:ghc
         constraints: ghcide <0.7.4, hls-plugin-api <0.7.1.0, hls-retrie-plugin <0.1.1.1
       '';
     };
