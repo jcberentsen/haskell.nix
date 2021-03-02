@@ -202,8 +202,8 @@ let
     coverage-golden = callTest ./coverage-golden { inherit compiler-nix-name;};
     coverage-no-libs = callTest ./coverage-no-libs { inherit compiler-nix-name; };
     snapshots = callTest ./snapshots {};
-  } // lib.optionalAttrs (!stdenv.hostPlatform.isGhcjs && !(__elem compiler-nix-name ["ghc8101" "ghc8102" "ghc8103" "ghc8104" "ghc810420210212"])) {
-    # Pandoc does not build with ghcjs or ghc 8.10 yet (lookup-sha256 and fully-static build pandoc)
+  } // lib.optionalAttrs (!stdenv.hostPlatform.isGhcjs && builtins.compareVersions pkgs.haskell-nix.compiler.${compiler-nix-name}.version "8.10" < 0) {
+    # Tha version of pandoc used in this test does not build with ghcjs or ghc 8.10 (lookup-sha256 and fully-static build pandoc)
     lookup-sha256 = callTest ./lookup-sha256 { inherit compiler-nix-name; };
     # fully-static = callTest ./fully-static { inherit (pkgs) buildPackages; };
   } // lib.optionalAttrs (!pkgs.haskell-nix.haskellLib.isCrossHost) {
