@@ -182,12 +182,14 @@ let
     extra-hackage = callTest ./extra-hackage { inherit compiler-nix-name; };
     compiler-nix-name = callTest ./compiler-nix-name {};
     cabal-hpack = callTest ./cabal-hpack { inherit util compiler-nix-name; };
-    index-state = callTest ./index-state { inherit compiler-nix-name; };
 
     unit = unitTests;
   } // lib.optionalAttrs (builtins.compareVersions pkgs.buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" < 0) {
+    # Haskell Language Server does not build for GHC 9 yet
     hls-cabal = callTest ./haskell-language-server/cabal.nix { inherit compiler-nix-name; };
     hls-stack = callTest ./haskell-language-server/stack.nix { inherit compiler-nix-name; };
+    # This test does not work with GHC 9
+    index-state = callTest ./index-state { inherit compiler-nix-name; };
   } // lib.optionalAttrs (!stdenv.hostPlatform.isGhcjs && !stdenv.hostPlatform.isWindows) {
     # Does not work on ghcjs because it needs zlib.
     # Does not work on windows because it needs mintty.
