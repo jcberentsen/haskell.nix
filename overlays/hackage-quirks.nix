@@ -80,7 +80,7 @@ in { haskell-nix = prev.haskell-nix // {
       # Added to get hlint building with GHC 9.0.1
       cabalProject = ''
         packages: .
-        allow-newer: hlint:ghc-lib-parser
+        allow-newer: ghc-lib-parser:base, ghc-lib-parser:ghc-prim
       '';
     };
 
