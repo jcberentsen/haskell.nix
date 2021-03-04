@@ -600,7 +600,7 @@ in {
         cabal-install = final.evalPackages.haskell-nix.cabal-install-unchecked.${compiler-nix-name};
         nix-tools = final.evalPackages.haskell-nix.nix-tools-unchecked.${compiler-nix-name};
         materialized = ../materialized + "/${compiler-nix-name}/cabal-install";
-      } // args)).components.exes.cabal;
+      } // args)).getComponent "exe:cabal";
     nix-tools-set = { compiler-nix-name, ... }@args:
       let
         # Until all the dependencies build with 9.0.1 we will have to avoid
@@ -642,7 +642,22 @@ in {
                 ];
             }];
           } // args // { inherit compiler-nix-name; });
-        exes = project.nix-tools.components.exes // project.hpack.components.exes;
+        exes =
+          let
+            package = project.getPackage "nix-tools";
+          in (builtins.map (name: package.getComponent "exe:${name}") [
+            "cabal-to-nix"
+            "hashes-to-nix"
+            "plan-to-nix"
+            "hackage-to-nix"
+            "lts-to-nix"
+            "stack-to-nix"
+            "truncate-index"
+            "stack-repos"
+            "cabal-name"
+          ]) ++ [
+            (project.getComponent "hpack:exe:hpack")
+          ];
         tools = [
           final.buildPackages.nix
           # Double buildPackages is intentional, see comment in lib/default.nix for details.
@@ -651,7 +666,7 @@ in {
     in
       final.symlinkJoin {
         name = "nix-tools";
-        paths = builtins.attrValues exes;
+        paths = exes;
         buildInputs = [ final.makeWrapper ];
         meta.platforms = final.lib.platforms.all;
         # We wrap the -to-nix executables with the executables from `tools` (e.g. nix-prefetch-git)
@@ -799,7 +814,7 @@ in {
                 version = "1.24.4";
                 inherit ghcOverride nix-tools cabal-install index-state;
                 materialized = ../materialized/bootstrap + "/${buildBootstrapper.compilerNixName}/hscolour";
-            } // args)).components.exes.HsColour;
+            } // args)).getComponent "exe:HsColour";
             hscolour = bootstrap.packages.hscolour-tool {};
             hscolour-unchecked = bootstrap.packages.hscolour-tool { checkMaterialization = false; };
         };
