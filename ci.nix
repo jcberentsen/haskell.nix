@@ -59,9 +59,7 @@
     # native so ifdLevel 1 includes compiler needed in ifdLevel2 eval)
     inherit (lib.systems.examples) musl64 aarch64-multiplatform;
   };
-  isDisabled = d:
-    let meta = d.meta or {};
-    in meta.disabled or false;
+  isDisabled = d: d.meta.disabled or false;
 in
 dimension "Nixpkgs version" nixpkgsVersions (nixpkgsName: nixpkgs-pin:
   let pinnedNixpkgsSrc = sources.${nixpkgs-pin};
