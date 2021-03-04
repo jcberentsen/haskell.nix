@@ -1,5 +1,5 @@
 # Test a package set
-{ stdenv, lib, testSrc, tool, compiler-nix-name }:
+{ stdenv, lib, testSrc, tool, compiler-nix-name, buildPackages }:
 
 with lib;
 
@@ -37,6 +37,11 @@ in
     '';
 
     meta.platforms = platforms.all;
+    # This test will need to be updated to use newer hackage index-state for it
+    # to work with GHC 9 and above.
+    meta.disabled = builtins.compareVersions
+      buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" < 0;
+    
 
     passthru = {
       # Used for debugging with nix repl
