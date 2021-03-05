@@ -53,7 +53,8 @@ let
   # The values in the input association list must be attribute sets themselves.
   addIfdInputsToVal = builtins.mapAttrs (_: val: withIfdInputs val);
 
-  # Keep only the attribute with the key "ifdInputs".
+  # Keep only the attribute with the key "ifdInputs" and "meta".
+  # Meta is needed for `meta.disabled` to work at this level.
   #
   # filterAttrsIfdInputs :: AttrSet -> AttrSet
   #
@@ -62,7 +63,7 @@ let
   #
   # >>> filterAttrsIfdInputs { foobar = "hello" }
   # { }
-  filterAttrsIfdInputs = pkgs.lib.filterAttrs (n: _: n == "ifdInputs");
+  filterAttrsIfdInputs = pkgs.lib.filterAttrs (n: _: n == "ifdInputs" || n == "meta");
 
   # Remove all keys and values in a attribute set where the key
   # doesn't equal "ifdInputs".  Set the "recurseForDerivations"
