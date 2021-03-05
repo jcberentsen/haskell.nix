@@ -40,7 +40,7 @@ in
     # This test will need to be updated to use newer hackage index-state for it
     # to work with GHC 9 and above.
     meta.disabled = builtins.compareVersions
-      buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" < 0;
+      buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" >= 0;
     
 
     passthru = {

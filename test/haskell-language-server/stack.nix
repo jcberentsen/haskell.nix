@@ -26,5 +26,5 @@ in recurseIntoAttrs {
 
   # Haskell Language Server does not build for GHC 9 yet
   meta.disabled = builtins.compareVersions
-    buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" < 0;
+    buildPackages.haskell-nix.compiler.${compiler-nix-name}.version "9.0" >= 0;
 }
