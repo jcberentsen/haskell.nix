@@ -82,6 +82,7 @@ pkgs:
     "libavformat"                        = [ pkgs."ffmpeg" ];
     "libavcodec"                         = [ pkgs."ffmpeg" ];
     "libswscale"                         = [ pkgs."ffmpeg" ];
+    "libavdevice"                        = [ pkgs."ffmpeg" ];
     "libcrypto"                          = [ pkgs."openssl".dev ];
     "libgsasl"                           = [ pkgs."gsasl" ];
     "libpcre"                            = [ pkgs."pcre" ];
