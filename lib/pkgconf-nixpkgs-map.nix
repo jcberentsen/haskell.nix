@@ -79,6 +79,7 @@ pkgs:
     "lber"                               = [ pkgs."openldap" ];
     "ldap"                               = [ pkgs."openldap" ];
     "libavutil"                          = [ pkgs."ffmpeg" ];
+    "libavformat"                        = [ pkgs."ffmpeg" ];
     "libcrypto"                          = [ pkgs."openssl".dev ];
     "libgsasl"                           = [ pkgs."gsasl" ];
     "libpcre"                            = [ pkgs."pcre" ];
