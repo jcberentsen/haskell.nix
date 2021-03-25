@@ -80,6 +80,7 @@ pkgs:
     "ldap"                               = [ pkgs."openldap" ];
     "libavutil"                          = [ pkgs."ffmpeg" ];
     "libavformat"                        = [ pkgs."ffmpeg" ];
+    "libavcodec"                         = [ pkgs."ffmpeg" ];
     "libcrypto"                          = [ pkgs."openssl".dev ];
     "libgsasl"                           = [ pkgs."gsasl" ];
     "libpcre"                            = [ pkgs."pcre" ];
